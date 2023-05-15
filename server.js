@@ -1,6 +1,6 @@
 const express = require('express')
 const cors = require('cors')
-const res = require('express/lib/response')
+const bodyParser = require('body-parser')
 
 const app = express()
 
@@ -13,17 +13,18 @@ app.use(cors(corsOptions))
 
 app.use(express.json())
 
-app.use(
-  express.urlencoded({
-    extended: true
-  })
-)
+app.use(express.urlencoded({ extended: true }))
 
 //api test
 
 app.get('/', (req, resp) => {
   resp.json({ message: 'Server live' })
 })
+
+// all routers
+const postRouter = require('./routes/postRouter')
+
+app.use('/api/posts', postRouter)
 
 //port
 const PORT = process.env.PORT || 8888

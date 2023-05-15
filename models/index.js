@@ -49,3 +49,5 @@ const test = async () => {
 }
 
 test()
+
+module.exports = db
