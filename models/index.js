@@ -33,7 +33,11 @@ db.posts = require('./postModel.js')(sequelize, DataTypes)
 db.comments = require('./commentModel.js')(sequelize, DataTypes)
 
 // setting force to true, will cause loss of db data
-db.sequelize.sync({ force: false })
+db.sequelize
+  .sync({ force: false }) // force break
+  .then(() => {
+    console.log('resync complete')
+  })
 
 const test = async () => {
   try {
