@@ -1,0 +1,410 @@
+@import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Lora:wght@400;600&family=Nanum+Myeongjo&family=Thasadith&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.card {
+  /* background-color: theme(gray); */
+  /* border-radius: theme('borderRadius.lg');
+  padding: theme('spacing.6');
+  box-shadow: theme('boxShadow.xl');
+  width: 300px;
+  height: 600px; */
+}
+
+.card-image {
+  height: 300px;
+  margin-right: 0px;
+  margin-left: 0px;
+}
+
+.inspo-image {
+  height: 200px;
+}
+
+#nav-logo {
+  height: 100px;
+  margin-top: 0px;
+}
+
+#nav-button {
+  font-family: 'Nanum Myeongjo';
+}
+
+#home-button {
+  font-family: 'Nanum Myeongjo';
+  margin-top: 15px;
+  margin-bottom: 0px;
+}
+
+#home-title {
+  font-family: 'Lora 400';
+  font-size: 50px;
+  margin-top: 30px;
+  margin-bottom: 20px;
+}
+
+#home-accents {
+  margin-top: 0px;
+}
+
+#home-subtitle {
+  font-family: 'Abril Fatface';
+  font-size: 40px;
+  margin-top: 10px;
+}
+
+#home-grid {
+  height: 600px;
+}
+
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+#home-image {
+  height: 550px;
+  margin-left: auto;
+  margin-right: auto;
+  animation: fadeIn 4s;
+}
+
+#elysian-definition {
+  width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#elysian-definition-name {
+  font-family: 'Lora 400';
+  font-size: 30px;
+}
+
+#elysian-definition-pro {
+  font-family: 'Thasadith';
+  font-size: 20px;
+}
+
+#elysian-definition-def {
+  font-family: 'Nanum Myeongjo';
+  font-size: 17px;
+  margin-bottom: 20px;
+}
+
+#small-stylists {
+  border-radius: 50%;
+  height: 200px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+#small-stylists-grid {
+  margin-top: 20px;
+}
+
+#gallery-summary {
+  font-family: 'Lora 400';
+  font-size: 20px;
+  width: 750px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 15px;
+}
+
+#consult-summary {
+  font-family: 'Lora 400';
+  font-size: 20px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#locations-title {
+  font-family: 'Lora 400';
+  font-size: 40px;
+  margin-top: 30px;
+  margin-bottom: 20px;
+}
+
+#locations-columns {
+  margin-right: auto;
+  margin-left: auto;
+}
+
+#location-image {
+  height: 400px;
+}
+
+#location-name {
+  font-family: 'Nanum Myeongjo';
+  font-size: 40px;
+}
+
+#location-address {
+  font-family: 'Nanum Myeongjo';
+  font-size: 15px;
+}
+
+#stylists-title {
+  font-family: 'Lora 400';
+  font-size: 40px;
+  margin-top: 30px;
+  margin-bottom: 20px;
+}
+
+#stylist-name {
+  font-family: 'Nanum Myeongjo';
+  font-size: 25px;
+  margin-top: 10px;
+}
+
+#stylist-bio {
+  font-family: 'Thasadith';
+  font-size: auto;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+
+#stylist-loca {
+  margin-bottom: 15px;
+  font-family: 'Thasadith';
+  font-size: 15px;
+}
+
+#stylist-image {
+  margin-top: 25px;
+  margin-left: auto;
+  margin-right: auto;
+  height: 400px;
+}
+
+#services-title {
+  font-family: 'Lora 400';
+  font-size: 40px;
+  margin-top: 30px;
+  margin-bottom: 20px;
+}
+
+#gallery-title {
+  font-family: 'Lora 400';
+  font-size: 40px;
+  margin-top: 30px;
+  margin-bottom: 20px;
+}
+
+#gallery-desc {
+  font-family: 'Thasadith';
+}
+
+#gallery-image{
+  margin-left: auto;
+  margin-right: auto;
+  animation: fadeIn 4s;
+}
+
+#products-title {
+  font-family: 'Lora 400';
+  font-size: 40px;
+  margin-top: 30px;
+  margin-bottom: 20px;
+}
+
+#footer-logo {
+  height: 100px;
+  margin-bottom: 0px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+#navbar {
+  margin-top: 0px;
+}
+
+#submit-page {
+  margin-top: 20px;
+}
+
+#submission-text {
+  font-family: 'Lora 400';
+  font-size: 40px;
+}
+
+#submission-text-2 {
+  font-family: 'Lora 400';
+  font-size: 30px;
+}
+
+#sub-button {
+  font-family: 'Nanum Myeongjo';
+  font-size: 20px;
+}
+
+#small-products {
+  font-family: 'Thasadith';
+}
+
+#product-card-name{
+  font-family: 'Nanum Myeongjo';
+  font-size: 40px;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+#product-card-price{
+  font-family: 'Thasadith';
+  font-size: 30px;
+  margin-top: 10px;
+}
+
+#product-card-desc{
+  font-family: 'Thasadith';
+  font-size: 25px;
+  margin-top: 5px;
+  margin-bottom: 20px;
+}
+
+#product-card-image {
+  height: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#product-button {
+  font-family: 'Nanum Myeongjo';
+  margin-bottom: 20px;
+}
+
+#empty-cart {
+  font-family: 'Thasadith';
+  font-size: 40px;
+  margin-top: 150px;
+  margin-bottom: 30px;
+}
+
+#empty-cart-button {
+  margin-bottom: 250px;
+  font-family: 'Nanum Myeongjo';
+  font-size: 20px;
+}
+
+#service-col {
+  margin-top: 10px;
+}
+
+#service-fine-print {
+  margin-top: 20px;
+  font-family: 'Thasadith';
+  font-size: 15px;
+}
+
+#service-name {
+  font-family: 'Nanum Myeongjo';
+  font-size: 20px;
+  margin-left: 20px;
+}
+
+#service-divider {
+  width: 350px;
+  align-content: center;
+}
+
+#service-price {
+  margin-right: 20px;
+  font-family: 'Nanum Myeongjo';
+  font-size: 20px;
+}
+
+@layer components {
+  .btn {
+    @apply p-4
+  }
+}
+
+.alert-container {
+  position: absolute;
+  top: 10rem;
+  left: 0;
+  right: 0;
+  height:400px;
+}
+
+.alert-inner {
+  display: inline-block;
+  padding: 8px 16px;
+  z-index: 1;
+  background-color: #ffffff;
+  box-shadow: 1px 2px 10px -3px rgb(0 0 0 / 70%);
+  -webkit-box-shadow: 1px 2px 10px -3px rgb(0 0 0 / 70%);
+  -moz-box-shadow: 1px 2px 10px -3px rgb(0 0 0 / 70%);
+}
+
+#cart-card {
+  background-color: #edeae5;
+  margin-top: 20px;
+  width: 300px;
+  height: 425px;
+}
+
+#cart-image {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#cart-name {
+  margin-top: 10px;
+  font-family: 'Nanum Myeongjo';
+  font-size: 20px;
+}
+
+#cart-qty {
+  font-family: 'Thasadith';
+  font-size: 15px;
+}
+
+#add-one {
+  margin-top: 15px;
+  font-family: 'Thasadith';
+  color: #4f5051;
+  margin-right: 10px;
+}
+
+#remove-one {
+  margin-top: 15px;
+  font-family: 'Thasadith';
+  color: #4f5051;
+  margin-left: 10px;
+}
+
+#total-checkout {
+  margin: 20px;
+  background-color: #edeae5;
+  height: 300px;
+}
+
+#total-price {
+  margin-top: 12px;
+  font-family: 'Nanum Myeongjo';
+  font-size: 17px;
+  margin-left: 0px;
+}
+
+#total-total {
+  margin-top: 12px;
+  font-family: 'Nanum Myeongjo';
+  font-size: 20px;
+}
+
+#total-dollar {
+  font-family: 'Thasadith';
+  font-size: 15px;
+}
+
+#consult-form {
+  font-family: 'Nanum Myeongjo';
+  font-size: 20px;
+  margin-top: 20px;
+  width: 650px;
+  margin-right: auto;
+  margin-left: auto;
+}
