@@ -602,3 +602,56 @@
   position: relative;
   border-radius: 5px;
 }
+
+#review-writer {
+  font-family: 'Nanum Myeongjo';
+  font-size: 15px;
+  margin-left: 400px;
+}
+
+#profile-name {
+  font-family: 'Abril Fatface';
+  font-size: 35px;
+  margin-bottom: 30px;
+}
+
+#profile-title {
+  margin-top: 20px;
+  font-family: 'Nanum Myeongjo';
+  font-size: 25px;
+}
+
+#profile-information {
+  font-family: 'Thasadith';
+  font-size: 17px;
+  
+}
+
+#profile-boxes {
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 150px;
+  width: 500px;
+  border: 2px solid #a79479;
+  position: relative;
+  border-radius: 5px;
+}
+
+#profile-button {
+  margin-bottom: 20px;
+  font-family: 'Nanum Myeongjo';
+  font-size: 15px;
+}
+
+#profile-delete {
+  margin-bottom: 20px;
+  font-family: 'Nanum Myeongjo';
+  font-size: 15px;
+}
+
+#empty-profile {
+  margin-top: 20px;
+  margin-bottom: 10px;
+  font-family: 'Thasadith';
+  font-size: 25px;
+}

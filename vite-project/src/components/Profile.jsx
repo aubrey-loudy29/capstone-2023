@@ -1,10 +1,14 @@
 import Divider from '@mui/material/Divider';
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom"
+import { useSelector } from "react-redux";
 
-const Profile = () => {
+const Profile = ({currentUser}) => {
     const [users, setUsers] = useState([]);
-    const [reviews, setReviews] = useState([]);
+    const [yourReviews, setYourReviews] = useState([{}])
+    const [allReviews, setAllReviews] = useState([{}])
+
+    const {username, reviews, appointments, email} = currentUser
 
     useEffect(() => {
         const fetchUsers = async () => {
@@ -17,16 +21,33 @@ const Profile = () => {
         fetchUsers();
     }, []);
 
+    // delete review
     useEffect(() => {
-        const fetchReviews= async () => {
-        const resp = await fetch("/api/reviews");
-        if (resp.ok) {
-            const reviews = await resp.json();
-            setReviews(reviews);
-        }
-        };
-        fetchReviews();
-    }, []);
+        const fetchData = async () => {
+        const data = await fetch("/api/reviews");
+        setAllReviews(data.data);
+    };
+    fetchData();
+    })
+
+    const deleteYourReview = (review) => {
+        setYourReviews(yourReviews.filter(r => r.id !== review.id))
+        setAllReviews(allReviews.filter(r => r.id !== review.id))
+    }
+
+    const handleDelete = (review) => {
+        fetch(`/reviews/${review.id}`, {
+          method: 'DELETE'
+        })
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Failed to delete review')
+          }
+          
+          deleteYourReview(review)
+        })
+        .catch(error => console.error(error))
+    }
 
     return (
         <div>
@@ -35,24 +56,43 @@ const Profile = () => {
                P R O F I L E
             <Divider />
             </p>
-            <div>
-            {users.length === 0 && <div>
+            <p id='profile-name' className='text-darkGray opacity-75'>
+                Welcome {username}!
+            </p>
+            <div className='columns-2'>
+            <div id='profile-boxes' className='bg-greige'>
+                <p id='profile-title' className='underline underline-offset-8'> Your Reviews </p>
+            {reviews === 0 && <div>
                
-                <p id='empty-cart' className='text-darkGray opacity-50'>You don't have any appointments booked.</p>
-                <Link to={"/book"}>
-                    <button id='empty-cart-button' className="btn bg-gray-100 text-dark-gray rounded-[12px] opacity-75 underline underline-offset-8">Book An Appointment</button>
-                </Link>
-            </div>}
-            </div>
-            <div>
-            {reviews.length === 0 && <div>
-               
-                <p id='empty-cart' className='text-darkGray opacity-50'>You have not written any reviews.</p>
+                <p id='empty-profile' className='text-darkGray opacity-50'>You dont have any reviews</p>
                 <Link to={"/reviews"}>
-                    <button id='empty-cart-button' className="btn bg-gray-100 text-dark-gray rounded-[12px] opacity-75 underline underline-offset-8">Add A Review</button>
+                    <button id='profile-button' className="btn bg-tan text-dark-gray rounded-[12px] opacity-50">Write a Review!</button>
                 </Link>
             </div>}
+            {reviews.map((r) => (
+                    <div key={r.id} className="p-2">
+                            <p id='profile-information'className="text-darkBlue text-left">•{r.text}</p> 
+                            <button id='profile-delete' className="btn bg-brown text-greige rounded-[12px] opacity-50" onClick={() => handleDelete(r)}>Delete Review.</button>
+                    </div>
+            ))}
             </div>
+            <div id='profile-boxes'className='bg-greige'>
+                <p id='profile-title' className='underline underline-offset-8'> Your Appointments </p>
+            {appointments.length === 0 && <div>
+               
+                <p id='empty-profile' className='text-darkGray opacity-50'>You dont have any Appointments</p>
+                <Link to={"/book"}>
+                    <button id='profile-button' className="btn bg-tan text-dark-gray rounded-[12px] opacity-50">Book an Appointment!</button>
+                </Link>
+            </div>}
+            {appointments.map((a) => (
+                    <div key={a.id} className="p-2">
+                            <p className="text-darkBlue">{a.stylist}</p> 
+                    </div>
+            ))}
+            </div>
+            
+        </div>
         </div>
     )
 }

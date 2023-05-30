@@ -128,7 +128,7 @@ function App() {
     }
 
     const routes = (
-        <Routes> 
+        <Routes>
             <Route exact path='/' element={<Home />} />
             <Route path='/login' element={<Login handleLogin={handleLogin} currentUser={currentUser}/>} />
             <Route path='/register' element={<Register />} />
@@ -137,22 +137,22 @@ function App() {
             <Route path='/products/:id' element={<ProductCard onBoth={onBoth} onAddToCart={onAddToCart}/>} />
             <Route path='/services' element={
                     <div>
-                        <FilterService 
+                        {/* <FilterService 
                         filters={filters}
                         selected={selected}
                         toggleCategory={toggleCategory}
-                        />
+                        /> */}
                         <Services 
                         serviceArray={servicesToShow}/>
                     </div>} />
             <Route path='/locations' element={<Locations />} />
             <Route path='/gallery' element={<Gallery />} />
-            <Route path='/profile' element={<Profile />} />
+            <Route path='/profile' element={<Profile currentUser={currentUser}/>} />
             <Route path='/book' element={<BookApt />} />
             <Route path='/consult' element={<Consult />} />
             <Route path='/cart' element={<Cart onAddToCart={onAddToCart} onRemove={onRemove} cartItems={cartItems}/>} />
             <Route path='/submitted' element={<Submitted />} />
-            <Route path='/reviews' element={<Reviews />} />
+            <Route path='/reviews' element={<Reviews currentUser={currentUser}/>} />
         </Routes>
     )
     

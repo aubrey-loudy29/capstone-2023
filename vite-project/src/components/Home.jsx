@@ -21,6 +21,8 @@ import salon8 from '../assets/salon8.jpeg'
 import salon10 from '../assets/salon10.jpeg'
 import salon11 from '../assets/salon11.jpeg'
 
+import { useSelector } from "react-redux";
+
 function Section({ children }) {
     const ref = useRef(null);
     const isInView = useInView(ref, { once: true });
