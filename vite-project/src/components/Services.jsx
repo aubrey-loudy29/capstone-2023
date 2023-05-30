@@ -1,19 +1,8 @@
 import { useEffect, useState } from "react";
 import Divider from '@mui/material/Divider';
+import FilterService from './FilterService'
 
-const Services = () => {
-    const [services, setServices] = useState([]);
-
-    useEffect(() => {
-        const fetchServices = async () => {
-        const resp = await fetch("/api/services");
-        if (resp.ok) {
-            const services = await resp.json();
-            setServices(services);
-        }
-    };
-    fetchServices();
-}, []);
+const Services = ({serviceArray}) => {
 
     return (
         <div>
@@ -26,7 +15,7 @@ const Services = () => {
                 <p id='service-fine-print'> * The prices listed are starting prices. Prices are subject to change if 
                     the service takes longer than an allotted amount of time or if extra product 
                     is required to complete the service. *</p>
-                {services.map((s) => (
+                {serviceArray.map((s) => (
                     <div key={s.id} id='service-col' className="columns-3 justify-items-start p-2">
                             <p id='service-name' className="text-darkBlue">{s.name}</p> 
                             <Divider id='service-divider'/>

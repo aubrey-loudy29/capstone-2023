@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import Divider from '@mui/material/Divider';
+import { Link } from "react-router-dom"
 
 const Locations = () => {
     const [locations, setLocations] = useState([]);
@@ -27,7 +28,9 @@ const Locations = () => {
                     <div key={l.id} id='locations-columns' className="flex grid justify-top flex-col w-80 h-100">
                     <img id='location-image' src={l.image} alt={l.name}/>
                     <p id='location-name' >{l.name}</p>
-                    <p id='location-address' >{l.address}</p>
+                    <Link to={"https://maps.app.goo.gl/FNdQLfqSdQeBhsvG8?g_st=ic"}>
+                    <p className='underline underline-offset-6' id='location-address' >{l.address}</p>
+                    </Link>
                     </div>
             ))}
             </div>

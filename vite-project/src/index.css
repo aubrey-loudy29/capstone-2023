@@ -25,6 +25,12 @@
 #nav-logo {
   height: 100px;
   margin-top: 0px;
+  margin-left: 25px;
+}
+
+#nav-button-group {
+  margin-top: 25px;
+  margin-left: 150px;
 }
 
 #nav-button {
@@ -68,6 +74,13 @@
   margin-left: auto;
   margin-right: auto;
   animation: fadeIn 4s;
+  border: 2px solid #504f4e;
+  position: relative;
+}
+
+#about-us {
+  border: 2px solid #bead9c;
+  position: relative;
 }
 
 #elysian-definition {
@@ -117,6 +130,30 @@
   font-size: 20px;
   margin-left: auto;
   margin-right: auto;
+  width: 380px;
+}
+
+#review-box {
+  height: 400px;
+}
+
+#reviews {
+  font-family: 'Lora 400';
+  font-size: 20px;
+  margin-top: 20px;
+}
+
+#reviews-scroll {
+  font-size: 40px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 5px;
+}
+
+#social-icons {
+  width: 100px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 #locations-title {
@@ -133,6 +170,8 @@
 
 #location-image {
   height: 400px;
+  border: 3px solid #504f4e;
+  position: relative;
 }
 
 #location-name {
@@ -143,6 +182,11 @@
 #location-address {
   font-family: 'Nanum Myeongjo';
   font-size: 15px;
+}
+
+#stylist-card {
+  border: 3px solid #87a9b8;
+  position: relative;
 }
 
 #stylists-title {
@@ -167,7 +211,8 @@
 }
 
 #stylist-loca {
-  margin-bottom: 15px;
+  margin-top: 15px;
+  margin-bottom: 10px;
   font-family: 'Thasadith';
   font-size: 15px;
 }
@@ -177,6 +222,8 @@
   margin-left: auto;
   margin-right: auto;
   height: 400px;
+  border: 3px solid #87a9b8;
+  position: relative;
 }
 
 #services-title {
@@ -223,6 +270,8 @@
 
 #submit-page {
   margin-top: 20px;
+  height: 650px;
+  margin-bottom: 50px;
 }
 
 #submission-text {
@@ -276,14 +325,14 @@
 }
 
 #empty-cart {
-  font-family: 'Thasadith';
+  font-family: 'Abril Fatface';
   font-size: 40px;
   margin-top: 150px;
   margin-bottom: 30px;
 }
 
 #empty-cart-button {
-  margin-bottom: 250px;
+  margin-bottom: 200px;
   font-family: 'Nanum Myeongjo';
   font-size: 20px;
 }
@@ -407,4 +456,149 @@
   width: 650px;
   margin-right: auto;
   margin-left: auto;
+  border: 2px solid #a79479;
+  position: relative;
+  border-radius: 5px;
+}
+
+#login-form {
+  width: 600px;
+  height: 350px;
+  margin-top: 40px;
+  margin-bottom: 150px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+#login-title {
+  font-size: 40px;
+  margin-bottom: 15px;
+  font-family: 'Nanum Myeongjo';
+  margin-top: 15px;
+}
+
+#login-label {
+  font-family: 'Nanum Myeongjo';
+  font-size: 20px;
+  margin-bottom: 20px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+#login-route {
+  font-family: 'Nanum Myeongjo';
+  font-size: 20px;
+  margin-bottom: 15px;
+}
+
+#book-form {
+  width: 650px;
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 30px;
+  margin-bottom: 100px;
+  border: 2px solid #a79479;
+  position: relative;
+  border-radius: 5px;
+}
+
+#book-dropdowns {
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.dropdown-container {
+  text-align: left;
+  border: 1px solid #a79479;
+  position: relative;
+  border-radius: 5px;
+  width: 200px;
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 20px;
+  margin-bottom: 150px;
+}
+
+.service-dropdown-container {
+  text-align: left;
+  border: 1px solid #a79479;
+  position: relative;
+  border-radius: 5px;
+  width: 200px;
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 20px;
+  margin-bottom: 150px;
+}
+
+.dropdown-input {
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  user-select: none;
+}
+
+.dropdown-menu {
+  position: absolute;
+  transform: translateY (4px);
+  width: 100%;
+  border: 1px solid #a79479; 
+  border-radius: 5px; 
+  overflow: auto;
+  max-height: 150px;
+  background-color: #f7f2e6;
+}
+  
+.dropdown-item {
+  padding: 5px;
+  cursor: pointer;
+}
+
+.dropdown-item:hover {
+  background-color: #d5c6b2;
+}
+
+.dropdown-item.selected {
+  background-color: #a79479;
+  color: #f7f2e6;
+}
+
+#date-picker {
+  width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 20px;
+}
+
+#book-button {
+  font-family: 'Nanum Myeongjo';
+  margin-bottom: 15px;
+}
+
+#review-button {
+  font-family: 'Nanum Myeongjo';
+  margin-top: 15px;
+  margin-bottom: 25px;
+}
+
+#review-message {
+  font-family: 'Nanum Myeongjo';
+  font-size: 12px;
+  width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#review-form {
+  font-family: 'Nanum Myeongjo';
+  font-size: 20px;
+  margin-top: 40px;
+  margin-bottom: 170px;
+  margin-right: auto;
+  margin-left: auto;
+  width: 650px;
+  border: 2px solid #a79479;
+  position: relative;
+  border-radius: 5px;
 }

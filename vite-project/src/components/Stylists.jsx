@@ -38,5 +38,3 @@ const Stylists = () => {
 }
 
 export default Stylists
-
-// 'block flex justify-top flex-column h-80 bg-beige text-brown rounded-t-3xl'

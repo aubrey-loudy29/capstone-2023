@@ -3,6 +3,9 @@ import { Link } from "react-router-dom"
 import { useEffect, useState } from "react";
 import { useRef } from "react";
 import { useInView } from "framer-motion";
+import SimpleImageSlider from "react-simple-image-slider";
+import instagram from '../assets/instagram.png'
+import facebook from '../assets/facebook.png'
 import gallery from '../assets/gallery.png'
 import stylist1 from '../assets/stylist1.jpeg'
 import stylist2 from '../assets/stylist2.jpeg'
@@ -39,23 +42,33 @@ function Section({ children }) {
 
 const Home = () => {
     const ref = useRef(null);
-
+    const [reviews, setReviews] = useState([]);
+    
     useEffect(() => {
-        const fetchStylists = async () => {
-        const resp = await fetch("/api/stylists");
-        if (resp.ok) {
-            const stylists = await resp.json();
-            setStylists(stylists);
-        }
-    };
-    fetchStylists();
+        const fetchReviews = async () => {
+            const resp = await fetch("/api/reviews");
+            if (resp.ok) {
+                const reviews = await resp.json();
+                setReviews(reviews);
+            }
+        };
+        fetchReviews();
     }, []);
+    
+    const [reviewData, setReviewData] = useState(reviews[0]);
+    const handleClick=(index) => {
+        console.log(index);
+        console.log(reviews)
+        const reviewSlider = reviews[index].text;
+        setReviewData(reviewSlider);
+    }
 
     return (
         <div id='home'>
             <p id='home-title'>
             <Divider />
                 H O M E
+                {/* <p id='home-small-title'> Welcome</p> */}
             <Divider />
             </p>
             <Section>
@@ -73,19 +86,37 @@ const Home = () => {
             </Section>
             <div id='home-accents' className='justify-top'>
             <Section>
-            <div className='bg-greige text-tan p-8' >
+            <div id='about-us' className='bg-greige text-tan p-8' >
                 <p id='home-subtitle' > About Us! </p>
-                <div id='elysian-definition' className='bg-tan text-greige rounded'>
+                <div id='elysian-definition' className='bg-tan text-greige'>
                     <p id='elysian-definition-name'>elysian</p>
                     <p id='elysian-definition-pro'>[el.ee.sian] greek</p>
                     <p id='elysian-definition-def'> beautiful or creative, divinely inspired.</p>
                 </div>
-                <p id='gallery-summary'> Our mission is to create a relaxing and friendly space that values family, 
-                    individuality and artistry. We created Elysian to be a place where our staff members can thrive
-                    and be able to work together to provide services that instill confidence in our guests. Our goal
-                    is that each and every person that steps foot into our doors would leave feeling refreshed, connected
-                    and beautiful.
+                <p id='gallery-summary'> 
+                    Our mission is to create a relaxing + friendly space that values family, 
+                    individuality and artistry. We created Elysian to be a place where our 
+                    staff members can thrive + be able to work together to provide services 
+                    that instill confidence in our guests. Our goal is that each and every 
+                    person that steps foot into our doors would leave feeling refreshed, 
+                    connected + beautiful.
                 </p>
+            </div>
+            </Section>
+            <Section>
+            <div id="review-box" className='bg-darkGray text-tan p-10' >
+                <p id='home-subtitle' > Reviews </p>
+                <div id='reviews' className='opacity-75'>" {reviewData} "</div>
+                <div id='reviews-scroll' className='flex gap-5 justify-center'>
+                {reviews.map((r, i) => (
+                    <h1 className='hover:cursor-pointer' key={i} onClick = {() => handleClick(i)}>•</h1>
+                    ))}
+                </div>
+                <div>
+                <Link to={"/reviews"}>
+                    <button id='home-button' className="btn outline p-2 opacity-50 text-beige rounded-[12px]">Write A review!</button>
+                </Link>
+                </div>
             </div>
             </Section>
             <Section>
@@ -112,17 +143,16 @@ const Home = () => {
             <Section>
             <div className='bg-lightBlue text-blue justify-top p-12'>
                 <p id='home-subtitle'> Services </p>
-                <p id='gallery-summary'> What if i just write a bucnh of stuff in here 
-                    dshbuidbuefewnjjewndkjewqjnejqwkneqdbneqjkdnwqd
-                    dhbekdqejdbkqwbjdjqwbdjkqwbdkqwbdbqwkdwq
-                    hqjwdhjbqwdjbwqjdjqwbdbqwjdb wqkbjdjbqwdbjkqwbjdbwq
-                    qkjwbdjkqbdjkq c c cjbqwdwqjdjnqwkjc jkdqwjbdqwkjd qwsw
-                    hjkqdjwqdjqwjjkbc qjkcqwjdjnqw  djkwqbjdqwn ecjqwbjhbhjdhjdbdjhd
-                    dbhhdjhwq dwhnwqbhjwjbh q hqjwdhjbqwdjbwqjdjqwbdbqwjdbdwbjqh  wqkbjdjbqwdbjkqwbjdbwq
-                    qjb c hjwqbbjhwqh cqhwqbhjdwhbdw  cqjbhwqbdqbkwdkd cbhwqjbdqwjkd jckjwdjwqc bwjk
+                <p id='gallery-summary'> 
+                    We are a full service hair and skin salon! Our stylists and estheticians
+                    strive to give our guests the best service possible. Every appointment is completed
+                    with complimentary services added on; neck + shoulder massage, hot towel, a full 
+                    snack and drink bar; ensuring that our guests are going to recieve the best
+                    possible service + leave feeling relaxed, refreshed + rejuvenated! Click down below 
+                    to view our service list and starting prices for each service!
                 </p>
                 <Link to={"/services"}>
-                    <button id='home-button' className="btn bg-gray-100 opacity-50 outline rounded-[12px]">Check Out Our Full Service List</button>
+                    <button id='home-button' className="btn bg-gray-100 opacity-50 outline rounded-[12px]">Full Service List</button>
                 </Link>
             </div>
             </Section>
@@ -142,7 +172,7 @@ const Home = () => {
             </div>
             </Section>
             <Section>
-            <div className="columns-2 p-10 gap-10 bg-greige text-tan" >
+            <div id='about-us' className="columns-2 p-10 gap-10 bg-greige text-tan" >
                 <div>
                 <p id='home-subtitle'> Consultation </p>
                 <p id='consult-summary'> Don't know what service you're looking for? Take our free online consultation here!</p>
@@ -155,7 +185,15 @@ const Home = () => {
                 <div id='consult-summary' >
                     <p> East Location - 555.444.3333</p>
                     <p> West Location - 222.111.0000</p>
-                    <p> elysian_salons@gmail.com </p>
+                    <p> elysian-salons@gmail.com </p>
+                    <div id='social-icons'className='columns-2 gap-2'>
+                    <Link to={'https://medium.com/@aubrey.d.webster'}>
+                    <img src={instagram} />
+                    </Link>
+                    <Link to={'https://www.linkedin.com/in/aubrey-loudenslager/'} >
+                    <img src={facebook} />
+                    </Link>
+                    </div>
                 </div>
             </div>
             </div>

@@ -19,13 +19,13 @@ class Consult extends Component {
             <form>
             <div id='consult-form' className="columns-1 justify-items-start p-2 bg-greige rounded">
                 <div>
-            <label>
-                Name:
-                <p>
-                <input type="text" name="name" />
-                </p>
-            </label>
-            </div>
+                    <label>
+                        Name:
+                        <p>
+                        <input type="text" name="name" />
+                        </p>
+                    </label>
+                </div>
             <div>
             <label>
                 Email:

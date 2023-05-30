@@ -1,5 +1,6 @@
 import Divider from '@mui/material/Divider';
 import { Link } from "react-router-dom"
+import { toast, ToastContainer } from "react-toastify"
 
 const Cart = ({cartItems, onAddToCart, onRemove }) => {
     const itemsPrice = cartItems.reduce((a, c) => a + c.price * c.qty, 0);
@@ -8,8 +9,10 @@ const Cart = ({cartItems, onAddToCart, onRemove }) => {
     const totalPrice = itemsPrice + taxPrice + shippingPrice;
 
     return (
+        <>
+            <ToastContainer />
         <div>
-            <p id='home-title'>
+            <p id='locations-title'>
             <Divider />
                 Y O U R C A R T
             <Divider />
@@ -17,11 +20,11 @@ const Cart = ({cartItems, onAddToCart, onRemove }) => {
             <div>
                 {cartItems.length === 0 && <div>
                
-                <p id='empty-cart'>Your Cart is Empty</p>
+                <p id='empty-cart' className='text-darkGray opacity-50'>Your Cart is Empty</p>
                 <Link to={"/products"}>
-                    <button id='empty-cart-button' className="btn bg-gray-100 text-dark-gray rounded-[12px] underline underline-offset-8">Browse Products</button>
+                    <button id='empty-cart-button' className="btn bg-gray-100 text-dark-gray rounded-[12px] opacity-75 underline underline-offset-8">Browse Products</button>
                 </Link>
-                </div>}
+            </div>}
             </div>
             <div className='grid grid-cols-4 gap-4'>
             {cartItems.map((item) => (
@@ -57,13 +60,14 @@ const Cart = ({cartItems, onAddToCart, onRemove }) => {
                     </div>
                     <div className='checkout-button'> 
                     <form>
-                        <button id='nav-button' className="btn bg-gray-100 text-dark-gray rounded-[12px] underline underline-offset-8">Checkout</button>
+                        <button id='nav-button' onClick={(e) => {e.preventDefault();toast.success('Thanks for pyour purchse. Check your email for a shipping confirmation.')}} className="btn bg-gray-100 text-dark-gray rounded-[12px] underline underline-offset-8">Checkout</button>
                     </form>
                     </div>
                 </div>
             )}
             </div>
         </div>
+        </>
     )
 }
 
