@@ -3,8 +3,9 @@ import small from '../assets/small.png';
 import '../../tailwind.config'
 
 const Navbar = () => {
+    
     return (
-        <div className="top-0 flex flex-row space-x-5 ">
+        <div id='navbar' className=" bg-white bg-opacity-50 flex flex-row space-x-5 top-0 left-0 right-0 ">
             <img id='nav-logo' src={small} alt='small logo' />
             <div id='nav-button-group' className="space-x-4">
             <Link to={"/"}>

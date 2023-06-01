@@ -103,7 +103,7 @@ class Consult extends Component {
             <div>
             <label>
                 Anything else we should know about your hair?
-                <input rows='3' type="text" name="survery" />
+                <input rows='3' cols='50' type="text" name="survery" />
             </label>
             <div>
             <Link to={"/submitted"}>

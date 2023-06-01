@@ -1,12 +1,24 @@
 import Divider from '@mui/material/Divider';
 import { Link } from "react-router-dom"
 import { toast, ToastContainer } from "react-toastify"
+import React, { useState } from "react";
 
 const Cart = ({cartItems, onAddToCart, onRemove }) => {
     const itemsPrice = cartItems.reduce((a, c) => a + c.price * c.qty, 0);
     const taxPrice = itemsPrice * 0.14;
     const shippingPrice = itemsPrice > 150 ? 25 : 15;
     const totalPrice = itemsPrice + taxPrice + shippingPrice;
+    const [modal, setModal] = useState(false);
+
+    const toggleModal = (e) => {
+        setModal(!modal);
+        // e = e || window.event;
+        e.preventDefault();
+    }
+
+    const reset = () => {
+        setModal(!modal);
+    }
 
     return (
         <>
@@ -60,8 +72,21 @@ const Cart = ({cartItems, onAddToCart, onRemove }) => {
                     </div>
                     <div className='checkout-button'> 
                     <form>
-                        <button id='nav-button' onClick={(e) => {e.preventDefault();toast.success('Thanks for pyour purchse. Check your email for a shipping confirmation.')}} className="btn bg-gray-100 text-dark-gray rounded-[12px] underline underline-offset-8">Checkout</button>
+                        <button id='nav-button' onClick={toggleModal} className="btn bg-gray-100 text-dark-gray rounded-[12px] underline underline-offset-8">Checkout</button>
                     </form>
+                    {modal && (
+                        <div className='modal'>
+                        <div id='modal' className="overlay">
+                            <div id="modal-content" className='bg-blue p-5'>
+                            <h1 id='modal-title'className='text-brown'> Proceed with Checkout? </h1>
+                            <Link to={'/checkedout'}>
+                            <button id='modal-button' onClick={reset} className="btn bg-tan text-darkGray opacity-75 rounded-[12px]"> Yes </button>
+                            </Link>
+                            <button id='modal-button' className="btn bg-tan text-darkGray opacity-75 rounded-[12px]" onClick={toggleModal} > No </button>
+                            </div>
+                        </div>
+                        </div>
+                    )}
                     </div>
                 </div>
             )}

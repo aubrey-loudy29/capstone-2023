@@ -116,7 +116,7 @@ const Home = () => {
                 </div>
                 <div>
                 <Link to={"/reviews"}>
-                    <button id='home-button' className="btn outline p-2 opacity-50 text-beige rounded-[12px]">Write A review!</button>
+                    <button id='home-button' className="btn outline p-2 opacity-50 text-beige rounded-[12px] inset-x-0 bottom-0">Write A review!</button>
                 </Link>
                 </div>
             </div>

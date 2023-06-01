@@ -4,11 +4,14 @@ from flask_bcrypt import Bcrypt #pip install Flask-Bcrypt = https://pypi.org/pro
 from flask_migrate import Migrate
 from flask_restful import Api, Resource
 from models import db, User, Stylist, Product, Location, Service, Appointment, Review, Inspo 
+import os
+from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.json.compact = False
+app.secret_key = b'\xfd\xd8\xf3\xf2\xac\x948z@>B\xa5p\xe5\xf0w\xfaX\xae\xc3\xe1\xc3\xceP'
 
 SQLALCHEMY_TRACK_MODIFICATIONS = False
 SQLALCHEMY_ECHO = True
@@ -104,20 +107,16 @@ class Appointments(Resource):
         a_dict = [a.to_dict() for a in appointments]
         return make_response(a_dict, 200)
 
-class AppointmentsById(Resource):
-    def get(self, id):
-        appointments = Appointment.query.filter_by(id=id).first()
-        if not appointments:
-            return make_response({"error": "Appointment not found"}, 404)
-        return make_response(appointments.to_dict(), 200)
-    
     def post(self):
         data = request.get_json()
+        print(data)
         try:
             new_appointment = Appointment(
                     user_id=data['user_id'],
-                    stylist_id=data['stylist_id'],
-                    service_id=data['service_id']
+                    stylist=data['stylist'],
+                    service=data['service'],
+                    date=data['date'],
+                    time=data['time']
             )
             db.session.add(new_appointment)
             db.session.commit()
@@ -125,6 +124,13 @@ class AppointmentsById(Resource):
         except Exception as e:
             return make_response({
                 "errors": [e.__str__()]}, 400)
+        
+class AppointmentsById(Resource):
+    def get(self, id):
+        appointments = Appointment.query.filter_by(id=id).first()
+        if not appointments:
+            return make_response({"error": "Appointment not found"}, 404)
+        return make_response(appointments.to_dict(), 200)
 
     def delete(self, id):
         appointment = Appointment.query.filter_by(id=id).first()
@@ -139,6 +145,35 @@ class Reviews(Resource):
         reviews = Review.query.all()
         r_dict = [r.to_dict() for r in reviews]
         return make_response(r_dict, 200)
+    
+    def post(self):
+        data = request.get_json()
+        try:
+            new_review = Review(
+                text=data['text'],
+                user_id=data['user_id']
+            )
+            db.session.add(new_review)
+            db.session.commit()
+            return make_response(new_review.to_dict(), 201)
+        except Exception as e:
+            return make_response({
+                "errors": [e.__str__()]}, 400)
+        
+class ReviewsById(Resource):
+    def get(self, id):
+        review = Review.query.filter_by(id=id).first()
+        if not review:
+            return make_response({"message" : "Review not found"})
+        return make_response(review.to_dict(), 200)
+    
+    def delete(self, id):
+        review = Review.query.filter_by(id=id).first()
+        if not review:
+            return make_response({"message" : "Review not found"})
+        db.session.delete(review)
+        db.session.commit()
+        return make_response({"mesage" : "Review was deleted"})
 
 class Inspos(Resource):
     def get(self):
@@ -164,8 +199,7 @@ class Signup(Resource):
         if user_exists:
             return jsonify({"error": "Email already exists"}), 409
      
-        hashed_password = bcrypt.generate_password_hash(password)
-        new_user = User(username=username, email=email, password=hashed_password)
+        new_user = User(username=username, email=email, password=password)
         db.session.add(new_user)
         db.session.commit()
  
@@ -173,29 +207,35 @@ class Signup(Resource):
     
         return jsonify({
             "id": new_user.id,
-            "email": new_user.email
+            "email": new_user.email,
+            # "password": new_user.password,
+            # "username": new_user.username
         })
         
 class Login(Resource):
-    def post(self): 
-        username = request.json["username"]
-        email = request.json["email"]
-        password = request.json["password"]
-    
+    def post(self):
+        data = request.get_json()
+        email = data['email']
+        username = data['username']
+        password = data['password']
+        print(data)
         user = User.query.filter_by(email=email).first()
+        print(user)
+        print(user.password == password)
+        if user:
+            if user.password == password:
+                session['user_id'] = user.id
+                return make_response(user.to_dict(), 200)
+        return make_response({'error': '401 Unauthorized'}, 401)
     
-        if user is None:
-            return jsonify({"error": "Unauthorized Access"}), 401
-    
-        if not bcrypt.check_password_hash(user.password, password):
-            return jsonify({"error": "Unauthorized"}), 401
-        
-        session["user_id"] = user.id
-    
-        return jsonify({
-            "id": user.id,
-            "email": user.email
-        })
+class CheckSession(Resource):
+    def get(self):
+        user_id = session.get('user_id')
+        if user_id:
+            user = User.query.filter(User.id == user_id).first()
+            if user:
+                return user.to_dict(), 200
+        return {'message': '401: Unauthorized'}, 401
 
 class Logout(Resource):
     def get(self):
@@ -214,9 +254,11 @@ api.add_resource(Services, '/services')
 api.add_resource(Appointments, '/appointments')
 api.add_resource(AppointmentsById, '/appointments/<int:id>')
 api.add_resource(Reviews, '/reviews')
+api.add_resource(ReviewsById, '/reviews/<int:id>')
 api.add_resource(Inspos, '/inspos')       
 api.add_resource(Signup, '/signup')    
 api.add_resource(Login, '/login')
+api.add_resource(CheckSession, '/check_session')
 api.add_resource(Logout, '/logout')
 api.add_resource(CheckUser, '/check_user')
 

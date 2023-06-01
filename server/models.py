@@ -2,13 +2,15 @@ from sqlalchemy.orm import validates
 from sqlalchemy.ext.associationproxy import association_proxy
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy_serializer import SerializerMixin
+from flask_bcrypt import Bcrypt
+from sqlalchemy.ext.hybrid import hybrid_property
 
 db = SQLAlchemy()
 
 class User(db.Model, SerializerMixin):
     __tablename__ = 'users'
 
-    serialize_rules = ('-created_at', '-updated_at' )
+    serialize_rules = ('-created_at', '-updated_at', )
     
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String, nullable=False)
@@ -16,8 +18,6 @@ class User(db.Model, SerializerMixin):
     password = db.Column(db.String, nullable=False)
     created_at = db.Column(db.DateTime, server_default=db.func.now())
     updated_at = db.Column(db.DateTime, onupdate=db.func.now())
-
-    # carts = db.relationship('Cart', foreign_keys='Cart.user_id', back_populates='user', cascade='all, delete-orphan')
 
     @validates('username')
     def validate_name(self, key, value):
@@ -32,25 +32,29 @@ class User(db.Model, SerializerMixin):
         return value
     
     @validates('password')
-    def validate_password(self, key, value):
+    def validate_email(self, key, value):
         if not value:
             raise ValueError('Password is required')
         return value
+    
 
 class Stylist(db.Model, SerializerMixin):
     __tablename__ = 'stylists'
         
     # serialize_rules = ('-created_at', '-updated_at', '-location_id', )
-    serialize_only = ('name', 'image', 'type', 'bio', 'locations', )
+    serialize_only = ('name', 'image', 'type', 'bio', 'locations', 'job',)
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String)
+    job = db.Column(db.String)
     image = db.Column(db.String)
     type = db.Column(db.Integer)
     bio = db.Column(db.String)
     location_id = db.Column(db.Integer, db.ForeignKey('locations.id'))
     created_at = db.Column(db.DateTime, server_default=db.func.now())
     updated_at = db.Column(db.DateTime, onupdate=db.func.now())
+
+    appointment = db.relationship('Appointment', backref='stylists')
 
 
 class Product(db.Model, SerializerMixin):
@@ -84,18 +88,18 @@ class Product(db.Model, SerializerMixin):
 class Appointment(db.Model, SerializerMixin):
     __tablename__ = 'appointments'
 
-    serialize_only = ('user_id', 'stylist_id', 'service_id', )
+    serialize_only = ('users', 'stylists', 'services', 'dateTime', )
     
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     stylist_id = db.Column(db.Integer, db.ForeignKey('stylists.id'))
     service_id = db.Column(db.Integer, db.ForeignKey('services.id'))
+    date = db.Column(db.String, nullable=False)
+    time = db.Column(db.String, nullable=False)
     created_at = db.Column(db.DateTime, server_default=db.func.now())
     updated_at = db.Column(db.DateTime, onupdate=db.func.now())
 
     user = db.relationship('User', backref='appointments')
-    stylist= db.relationship('Stylist', backref='appointments')
-    service= db.relationship('Service', backref='services')
 
     @validates('stylist')
     def validate_stylist(self, key, value):
@@ -112,15 +116,18 @@ class Appointment(db.Model, SerializerMixin):
 class Service(db.Model, SerializerMixin):
     __tablename__ = 'services'
 
-    serialize_only = ('name','type', 'price', 'length',)
+    serialize_only = ('name', 'category', 'price', 'length', 'type', )
     
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String)
+    category = db.Column(db.String)
     type = db.Column(db.Integer)
     price = db.Column(db.Integer)
     length = db.Column(db.Integer)
     created_at = db.Column(db.DateTime, server_default=db.func.now())
     updated_at = db.Column(db.DateTime, onupdate=db.func.now())
+
+    appointment = db.relationship('Appointment', backref='services')
 
 class Location(db.Model, SerializerMixin):
     __tablename__ = 'locations'
@@ -139,7 +146,7 @@ class Location(db.Model, SerializerMixin):
 class Review(db.Model, SerializerMixin):
     __tablename__ = 'reviews'
 
-    serialize_only = ('user_id','text',)
+    serialize_rules = ('-created_at', '-updated_at', '-user',)
     
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))

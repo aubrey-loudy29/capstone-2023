@@ -1,5 +1,6 @@
 import BookApt from './components/BookApt'
 import Cart from './components/Cart'
+import CheckedOut from './components/CheckedOut'
 import Consult from './components/Consult'
 import FilterService from './components/FilterService'
 import Footer from './components/Footer'
@@ -29,6 +30,7 @@ function App() {
     const [currentUser, setCurrentUser] = useState('')
     const [users, setUsers] = useState([]);
     const [serviceArray, setServiceArray] = useState([]);
+    const [rerender, setRerender] = useState(false)
 
     // filtering services
     const filters = [
@@ -129,14 +131,16 @@ function App() {
 
     const routes = (
         <Routes>
-            <Route exact path='/' element={<Home />} />
-            <Route path='/login' element={<Login handleLogin={handleLogin} currentUser={currentUser}/>} />
-            <Route path='/register' element={<Register />} />
-            <Route path='/stylists' element={<Stylists />} />
-            <Route path='/products' element={<Products />} />
-            <Route path='/products/:id' element={<ProductCard onBoth={onBoth} onAddToCart={onAddToCart}/>} />
+            <Route exact path='/' element={ <div><Navbar /> <Home /></div>} />
+            <Route path='/register' element={<Register setRerender={setRerender} rerender={rerender} handleLogin={handleLogin} currentUser={currentUser}/>} />
+            <Route path='/login' element={<Login setRerender={setRerender} rerender={rerender} handleLogin={handleLogin} currentUser={currentUser}/>} />
+            <Route path='/stylists' element={<div><Navbar /> <Stylists /></div>} />
+            <Route path='/checkedout' element={<CheckedOut currentUser={currentUser}/>}/>
+            <Route path='/products' element={<div><Navbar /> <Products /></div>} />
+            <Route path='/products/:id' element={<div><Navbar /> <ProductCard onBoth={onBoth} onAddToCart={onAddToCart}/> </div>} />
             <Route path='/services' element={
                     <div>
+                        <Navbar />
                         {/* <FilterService 
                         filters={filters}
                         selected={selected}
@@ -145,24 +149,23 @@ function App() {
                         <Services 
                         serviceArray={servicesToShow}/>
                     </div>} />
-            <Route path='/locations' element={<Locations />} />
-            <Route path='/gallery' element={<Gallery />} />
-            <Route path='/profile' element={<Profile currentUser={currentUser}/>} />
-            <Route path='/book' element={<BookApt />} />
-            <Route path='/consult' element={<Consult />} />
-            <Route path='/cart' element={<Cart onAddToCart={onAddToCart} onRemove={onRemove} cartItems={cartItems}/>} />
-            <Route path='/submitted' element={<Submitted />} />
-            <Route path='/reviews' element={<Reviews currentUser={currentUser}/>} />
+            <Route path='/locations' element={<div><Navbar /> <Locations /></div>} />
+            <Route path='/gallery' element={<div><Navbar /><Gallery /> </div>} />
+            <Route path='/profile' element={<div><Navbar /><Profile currentUser={currentUser}/></div>} />
+            <Route path='/book' element={<div><Navbar /><BookApt currentUser={currentUser}/></div>} />
+            <Route path='/consult' element={<div><Navbar /><Consult /></div>} />
+            <Route path='/cart' element={<div><Navbar /><Cart onAddToCart={onAddToCart} onRemove={onRemove} cartItems={cartItems}/></div>} />
+            <Route path='/submitted' element={<div><Navbar /><Submitted /></div>} />
+            <Route path='/reviews' element={<div><Navbar /><Reviews currentUser={currentUser}/></div>} />
         </Routes>
     )
-    
     return (
         <div className='app'>
-            <Navbar />
             {routes}
             <Footer />
         </div>
     )
 }
+    
 
 export default App

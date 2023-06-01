@@ -4,7 +4,7 @@ import axios from 'axios'
 import {useNavigate} from 'react-router-dom'
 import React, { useEffect, useState } from "react";
 
-const Login = ({handleLogin}) => {
+const Login = ({handleLogin, rerender, setRerender}) => {
 	const navigate = useNavigate();
 	const [username, setUsername] = useState('');
 	const [email, setEmail] = useState('');
@@ -20,7 +20,12 @@ const Login = ({handleLogin}) => {
 		} else if(username.length === 0) {
 			alert('Please enter a username');
 		} else{
-			alert('Success');
+			toast('Success. You are logged in!', {
+				position: "top-right",
+				autoClose: 5000,
+				hideProgressBar: false,
+				theme: "light",
+			});
 		}
 	}
 
@@ -40,17 +45,17 @@ const Login = ({handleLogin}) => {
 		setIsLoading(true);
 	
 
-	try {
-		const requestOptions = {
-			method: 'POST',
-			credentials: "include",
-			headers: { 'Content-Type': 'application/json' },
-			body: JSON.stringify({
-			username: username,
-			email: email,
-			password: password
-			})
-		};
+		try {
+			const requestOptions = {
+				method: 'POST',
+				credentials: "include",
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify({
+				username: username,
+				email: email,
+				password: password
+				})
+			};
 
 	fetch('/api/login', requestOptions)
     .then((r) => {
@@ -73,14 +78,16 @@ const Login = ({handleLogin}) => {
 
 	
   return (
+	<div id='login-page'> 
+	<ToastContainer />
+	<p id='login-big' className='text-darkGray opacity-75'>
+		Welcome to Elysian Salon
+	</p>
+	<p id='login-small' className='text-darkGray opacity-50'>Please login or register to view our site!</p>
 	<div className="container h-100">
 		<div className="container-fluid h-custom">
-		<div className="row d-flex justify-content-center align-items-center h-100">
-		<div id='login-form' className="col-md-8 col-lg-6 col-xl-4 offset-xl-1 bg-greige text-brown">
+		<div id='login-form' className="bg-greige text-brown">
     <div className="content">
-		{/* <div >{!currentUser ? <p className="navbarMessage">please login or create account </p>:
-                    <p >Welcome, {currentUser.username}!</p>
-            }</div> */}
       <div id='login-title' className="text underline underline-offset-8">
         Login Here
       </div>
@@ -116,7 +123,7 @@ const Login = ({handleLogin}) => {
           <span className="fas fa-lock"></span>
         </div>
         <div className="text-center text-lg-start mt-4 pt-2">
-        <button id='nav-button' className=" btn opacity-50 link-danger" type="submit" onClick={loginUser}>Sign in</button>
+        <button id='signin-button' className=" btn opacity-50 link-danger" type="submit" onClick={loginUser}>Sign in</button>
         <div id='login-route' className="sign-up">
           Dont have an account with us? <a href="/register" id='nav-button' className=" btn opacity-50 link-danger ">Create Account</a>
         </div>

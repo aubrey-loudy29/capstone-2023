@@ -4,18 +4,10 @@ import { Link } from "react-router-dom"
 
 const ProductCard = ({onAddToCart}) => {
     const [proCard, setProCard] = useState({})
-    const [toggle, setToggle] = useState(false)
     let {id} = useParams()
     const {name, image, price, description} = proCard
     const navigate = useNavigate()
     const [ isAlertVisible, setIsAlertVisible ] = useState(false)
-    const handleButtonClick = () => {
-        setIsAlertVisible(true);
-
-        setTimeout(() => {
-            setIsAlertVisible(false);
-        }, 3000);
-    }
 
     useEffect(() => {
         fetch(`/api/products/${id}`)

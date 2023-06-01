@@ -19,6 +19,7 @@ const Profile = ({currentUser}) => {
         }
         };
         fetchUsers();
+        // window.location.reload(false);
     }, []);
 
     // delete review
@@ -36,17 +37,18 @@ const Profile = ({currentUser}) => {
     }
 
     const handleDelete = (review) => {
-        fetch(`/reviews/${review.id}`, {
+        fetch(`/api/reviews/${review.id}`, {
           method: 'DELETE'
         })
         .then(response => {
           if (!response.ok) {
             throw new Error('Failed to delete review')
           }
-          
           deleteYourReview(review)
+          setUsers(users);
         })
         .catch(error => console.error(error))
+        window.location.reload(false);
     }
 
     return (
@@ -56,20 +58,20 @@ const Profile = ({currentUser}) => {
                P R O F I L E
             <Divider />
             </p>
-            <p id='profile-name' className='text-darkGray opacity-75'>
+            <p id='profile-name' className='text-brown opacity-75'>
                 Welcome {username}!
             </p>
             <div className='columns-2'>
             <div id='profile-boxes' className='bg-greige'>
                 <p id='profile-title' className='underline underline-offset-8'> Your Reviews </p>
-            {reviews === 0 && <div>
+            {!reviews || reviews.length === 0 && <div>
                
                 <p id='empty-profile' className='text-darkGray opacity-50'>You dont have any reviews</p>
                 <Link to={"/reviews"}>
                     <button id='profile-button' className="btn bg-tan text-dark-gray rounded-[12px] opacity-50">Write a Review!</button>
                 </Link>
             </div>}
-            {reviews.map((r) => (
+            {reviews && reviews.map((r) => (
                     <div key={r.id} className="p-2">
                             <p id='profile-information'className="text-darkBlue text-left">•{r.text}</p> 
                             <button id='profile-delete' className="btn bg-brown text-greige rounded-[12px] opacity-50" onClick={() => handleDelete(r)}>Delete Review.</button>
@@ -78,14 +80,14 @@ const Profile = ({currentUser}) => {
             </div>
             <div id='profile-boxes'className='bg-greige'>
                 <p id='profile-title' className='underline underline-offset-8'> Your Appointments </p>
-            {appointments.length === 0 && <div>
+            {!appointments || appointments.length === 0 && <div>
                
                 <p id='empty-profile' className='text-darkGray opacity-50'>You dont have any Appointments</p>
                 <Link to={"/book"}>
                     <button id='profile-button' className="btn bg-tan text-dark-gray rounded-[12px] opacity-50">Book an Appointment!</button>
                 </Link>
             </div>}
-            {appointments.map((a) => (
+            {appointments && appointments.map((a) => (
                     <div key={a.id} className="p-2">
                             <p className="text-darkBlue">{a.stylist}</p> 
                     </div>

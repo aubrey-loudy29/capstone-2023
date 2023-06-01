@@ -6,15 +6,16 @@ import React from 'react'
 import * as yup from "yup"
 
 const Reviews = ({currentUser}) => {
-      
+    const [rerender, setRerender] = useState(0)
+    const [review, setReview] = useState([])
     const [toggle, setToggle] = useState(false)
     const navigate = useNavigate();
-    const [userId, setUserId] = useState(null);
     
     const formSchema = yup.object().shape({
         text: yup.string().required("Must enter text"),
         user_id: yup.number().required("Must be logged in"),
     })
+
     const formik = useFormik({
         initialValues: {
             text:'',
@@ -30,16 +31,17 @@ const Reviews = ({currentUser}) => {
                 body: JSON.stringify(values, null, 2),
             }).then((res) => {
                 if(res.ok) {
-                    res.json().then(post => {
+                    const newReview= res.json().then(post => {
                         setToggle(!toggle)
                         navigate(`/`)
                     })
+                    setReview(oldReviews => [...oldReviews, newReview])
+                    window.location.reload(false);
                 }
             })
-            console.log(currentUser.id)
         },
     })
-    console.log(currentUser)
+    
     return (
         <div>
             <p id='locations-title'>
