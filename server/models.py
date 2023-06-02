@@ -88,14 +88,14 @@ class Product(db.Model, SerializerMixin):
 class Appointment(db.Model, SerializerMixin):
     __tablename__ = 'appointments'
 
-    serialize_only = ('users', 'stylists', 'services', 'dateTime', )
+    serialize_only = ('user', 'stylists', 'services', 'dateTime', )
     
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     stylist_id = db.Column(db.Integer, db.ForeignKey('stylists.id'))
     service_id = db.Column(db.Integer, db.ForeignKey('services.id'))
-    date = db.Column(db.String, nullable=False)
-    time = db.Column(db.String, nullable=False)
+    dateTime = db.Column(db.DateTime, nullable=False)
+    # time = db.Column(db.String, nullable=False)
     created_at = db.Column(db.DateTime, server_default=db.func.now())
     updated_at = db.Column(db.DateTime, onupdate=db.func.now())
 

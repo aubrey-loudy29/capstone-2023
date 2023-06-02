@@ -116,7 +116,7 @@ const Home = () => {
                 </div>
                 <div>
                 <Link to={"/reviews"}>
-                    <button id='home-button' className="btn outline p-2 opacity-50 text-beige rounded-[12px] inset-x-0 bottom-0">Write A review!</button>
+                    <button id='home-button' className="btn hover:bg-beige hover:text-darkGray outline p-2 opacity-50 text-beige rounded-[12px] inset-x-0 bottom-0">Write A review!</button>
                 </Link>
                 </div>
             </div>
@@ -137,7 +137,7 @@ const Home = () => {
                 </div>
                 <div>
                 <Link to={"/stylists"}>
-                    <button id='home-button' className="btn outline p-2 opacity-50 text-beige rounded-[12px]">Learn About Our Awesome Stylists!</button>
+                    <button id='home-button' className="btn hover:bg-beige hover:text-brown outline p-2 opacity-50 text-beige rounded-[12px]">Learn About Our Awesome Stylists!</button>
                 </Link>
                 </div>
             </div>
@@ -154,7 +154,7 @@ const Home = () => {
                     to view our service list and starting prices for each service!
                 </p>
                 <Link to={"/services"}>
-                    <button id='home-button' className="btn bg-gray-100 opacity-50 outline rounded-[12px]">Full Service List</button>
+                    <button id='home-button' className="btn hover:bg-blue hover:text-beige bg-gray-100 opacity-50 outline rounded-[12px]">Full Service List</button>
                 </Link>
             </div>
             </Section>
@@ -169,7 +169,7 @@ const Home = () => {
                 </p>
                 <img src={gallery} alt='gallery' />
                 <Link to={"/gallery"}>
-                    <button id='nav-button' className="btn bg-gray-100 opacity-50 outline text-tan rounded-[12px]">More Inspiration Pictures</button>
+                    <button id='nav-button' className="btn hover:bg-beige hover:text-darkGray bg-gray-100 opacity-50 outline text-tan rounded-[12px]">More Inspiration Pictures</button>
                 </Link>
             </div>
             </Section>
@@ -179,7 +179,7 @@ const Home = () => {
                 <p id='home-subtitle'> Consultation </p>
                 <p id='consult-summary'> Don't know what service you're looking for? Take our free online consultation here!</p>
                 <Link to={"/consult"}>
-                    <button id='home-button' className="btn bg-gray-100 opacity-50 outline rounded-[12px]">Online Consultation</button>
+                    <button id='home-button' className="btn hover:bg-brown hover:text-beige bg-gray-100 opacity-50 outline rounded-[12px]">Online Consultation</button>
                 </Link>
                 </div>
                 <div>
@@ -190,10 +190,10 @@ const Home = () => {
                     <p> elysian-salons@gmail.com </p>
                     <div id='social-icons'className='columns-2 gap-2'>
                     <Link to={'https://medium.com/@aubrey.d.webster'}>
-                    <img src={instagram} />
+                    <img className='hover:bg-greige hover:opacity-50 rounded-full' src={instagram} />
                     </Link>
                     <Link to={'https://www.linkedin.com/in/aubrey-loudenslager/'} >
-                    <img src={facebook} />
+                    <img className='hover:bg-greige hover:opacity-50 rounded-full' src={facebook} />
                     </Link>
                     </div>
                 </div>

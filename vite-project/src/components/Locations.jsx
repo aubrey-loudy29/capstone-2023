@@ -29,7 +29,7 @@ const Locations = () => {
                     <img id='location-image' src={l.image} alt={l.name}/>
                     <p id='location-name' >{l.name}</p>
                     <Link to={"https://maps.app.goo.gl/FNdQLfqSdQeBhsvG8?g_st=ic"}>
-                    <p className='underline underline-offset-6' id='location-address' >{l.address}</p>
+                    <p className='underline underline-offset-8 hover:opacity-50' id='location-address' >{l.address}</p>
                     </Link>
                     </div>
             ))}

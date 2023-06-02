@@ -747,3 +747,10 @@ body.active-modal {
   font-size: 25px;
   margin-bottom: 15px;
 }
+
+#submission-text {
+  font-family: 'Abril Fatface';
+  font-size: 30px;
+  margin-top: 20px;
+  margin-bottom: 15px;
+}

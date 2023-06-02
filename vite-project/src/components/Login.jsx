@@ -123,9 +123,9 @@ const Login = ({handleLogin, rerender, setRerender}) => {
           <span className="fas fa-lock"></span>
         </div>
         <div className="text-center text-lg-start mt-4 pt-2">
-        <button id='signin-button' className=" btn opacity-50 link-danger" type="submit" onClick={loginUser}>Sign in</button>
+        <button id='signin-button' className=" btn opacity-50 link-danger hover:underline" type="submit" onClick={loginUser}>Sign in</button>
         <div id='login-route' className="sign-up">
-          Dont have an account with us? <a href="/register" id='nav-button' className=" btn opacity-50 link-danger ">Create Account</a>
+          Dont have an account with us? <a href="/register" id='nav-button' className=" btn opacity-50 link-danger hover:underline">Create Account</a>
         </div>
 		</div>
       </form>

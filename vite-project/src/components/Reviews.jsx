@@ -59,7 +59,7 @@ const Reviews = ({currentUser}) => {
                     </label>
                 </div>
                 <p id='review-writer' className='text-brown opacity-75'> ~ {currentUser.username}</p>
-                <button id='review-button' className='btn bg-tan opacity-50 rounded-[12px]' type='input' >Submit</button>
+                <button id='review-button' className='btn hover:opacity-75 hover:text-greige bg-tan opacity-50 rounded-[12px]' type='input' >Submit</button>
             <p className='text-brown' id='review-message'>
                 Thank you so much for writing a review! It helps us improve the quality 
                 of our salon and provide the best experience possible to our clients!

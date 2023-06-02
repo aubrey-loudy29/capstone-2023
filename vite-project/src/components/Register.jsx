@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import axios from 'axios';
 import {useNavigate} from "react-router-dom";
-import * as yup from "yup"
 
 const Register = ({handleLogin}) => {
     const [username, setUsername] = useState('');
@@ -10,13 +9,7 @@ const Register = ({handleLogin}) => {
    
     const navigate = useNavigate();
 
-	const formSchema = yup.object().shape({
-        email: yup.string().required("Must enter email"),
-        username: yup.string().required("Must enter username"),
-		password: yup.string().required("Must enter password"),
-    })
-
-	function handleLoginResult(user) {
+    function handleLoginResult(user) {
 		if (user.hasOwnProperty('id')) {
 		handleLogin(user);
 		navigate("/");
@@ -49,7 +42,7 @@ const Register = ({handleLogin}) => {
                   <div id='login-form' className="col-md-8 col-lg-6 col-xl-4 offset-xl-1 bg-greige">
                     <form onSubmit={registerUser}>
                       <div className="d-flex flex-row align-items-center justify-content-center justify-content-lg-start">
-                        <p id='login-title'className="lead fw-normal mb-0 me-3 underline underline-offset-8 text-brown">Create Your Account</p>
+                        <p id='login-title'className="lead fw-normal mb-0 me-3 underline underline-offset-8 text-brown">Create an Account</p>
                       </div>
 
                       <div className="form-outline mb-4">
@@ -69,9 +62,9 @@ const Register = ({handleLogin}) => {
      
                       <div className="text-center text-lg-start mt-4 pt-2">
 						
-                        <button type="button" id='signin-button' className="btn btn-primary opacity-50 btn-lg" onClick={() => registerUser()} >Sign Up</button>
+                        <button type="button" id='signin-button' className="btn btn-primary hover:underline opacity-50 btn-lg" onClick={() => registerUser()} >Sign Up</button>
 						
-                        <p id='login-route' className="small fw-bold mt-2 pt-1 mb-0">Already have an account? <a href="/login" id='nav-button' className=" btn opacity-50 link-danger">Login Here</a></p>
+                        <p id='login-route' className="small fw-bold mt-2 pt-1 mb-0">Already have an account? <a href="/login" id='nav-button' className=" btn opacity-50 hover:underline link-danger">Login Here</a></p>
                       </div>
      
                     </form>

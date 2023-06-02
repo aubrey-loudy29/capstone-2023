@@ -34,7 +34,7 @@ const Cart = ({cartItems, onAddToCart, onRemove }) => {
                
                 <p id='empty-cart' className='text-darkGray opacity-50'>Your Cart is Empty</p>
                 <Link to={"/products"}>
-                    <button id='empty-cart-button' className="btn bg-gray-100 text-dark-gray rounded-[12px] opacity-75 underline underline-offset-8">Browse Products</button>
+                    <button id='empty-cart-button' className="btn bg-gray-100 hover:opacity-100 text-dark-gray rounded-[12px] opacity-50 underline underline-offset-8">Browse Products</button>
                 </Link>
             </div>}
             </div>
@@ -44,8 +44,8 @@ const Cart = ({cartItems, onAddToCart, onRemove }) => {
                 <div key={item.id} id='cart-card'>
                     <img id='cart-image' src={item.image} />
                     <div id='cart-name'>{item.name}</div>
-                    <button onClick={() => onAddToCart(item)} id='add-one'>add +</button>
-                    <button onClick={() => onRemove(item)} id='remove-one'>remove -</button>
+                    <button onClick={() => onAddToCart(item)} id='add-one' className='hover:underline'>add +</button>
+                    <button onClick={() => onRemove(item)} id='remove-one' className='hover:underline'>remove -</button>
                 <div id='cart-qty'>
                     {item.qty} x ${item.price.toFixed(2)}
                 </div>
@@ -72,7 +72,7 @@ const Cart = ({cartItems, onAddToCart, onRemove }) => {
                     </div>
                     <div className='checkout-button'> 
                     <form>
-                        <button id='nav-button' onClick={toggleModal} className="btn bg-gray-100 text-dark-gray rounded-[12px] underline underline-offset-8">Checkout</button>
+                        <button id='nav-button' onClick={toggleModal} className="btn bg-gray-100 hover:bg-tan hover:opacity-50 text-dark-gray rounded-[12px] underline underline-offset-8">Checkout</button>
                     </form>
                     {modal && (
                         <div className='modal'>
@@ -80,9 +80,9 @@ const Cart = ({cartItems, onAddToCart, onRemove }) => {
                             <div id="modal-content" className='bg-blue p-5'>
                             <h1 id='modal-title'className='text-brown'> Proceed with Checkout? </h1>
                             <Link to={'/checkedout'}>
-                            <button id='modal-button' onClick={reset} className="btn bg-tan text-darkGray opacity-75 rounded-[12px]"> Yes </button>
+                            <button id='modal-button' onClick={reset} className="btn bg-tan hover:bg-tan hover:text-greige hover:opacity-100 text-darkGray opacity-75 rounded-[12px]"> Yes </button>
                             </Link>
-                            <button id='modal-button' className="btn bg-tan text-darkGray opacity-75 rounded-[12px]" onClick={toggleModal} > No </button>
+                            <button id='modal-button' className="btn hover:bg-tan hover:text-greige hover:opacity-100 bg-tan text-darkGray opacity-75 rounded-[12px]" onClick={toggleModal} > No </button>
                             </div>
                         </div>
                         </div>

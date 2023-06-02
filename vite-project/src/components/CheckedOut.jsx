@@ -1,5 +1,4 @@
 import Divider from '@mui/material/Divider';
-import { Link } from "react-router-dom"
 import { useNavigate } from 'react-router-dom'
 
 const CheckedOut = ({currentUser}) => {
@@ -22,7 +21,7 @@ const CheckedOut = ({currentUser}) => {
                     Thank you for your purchase, {currentUser.username}. 
                     Please check your email for a shipping confirmation!
                 </p>
-                <button id='review-button' onClick={refresh} className='btn bg-greige opacity-75 rounded-[12px]'>Back to Home</button>
+                <button id='review-button' onClick={refresh} className='btn hover:opacity-100 bg-greige opacity-75 rounded-[12px]'>Back to Home</button>
             </div>
         </div>
     )

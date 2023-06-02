@@ -8,6 +8,7 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import Divider from '@mui/material/Divider';
 import { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom'
+import axios from 'axios';
 import * as yup from "yup"
 import { useFormik } from "formik"
 import Dropdown from 'react-dropdown';
@@ -28,52 +29,49 @@ const BookApt = ({currentUser}) => {
     const [showService, setShowService] = useState(false);
     const [selectedValue, setSelectedValue] = useState(null);
     const [selectedService, setSelectedService] = useState(null);
-    const [rerender, setRerender] = useState(0)
     const current = new Date();
-    const date = `${current.getDate()}/${current.getMonth()+1}/${current.getFullYear()}`;
-    const [toggle, setToggle] = useState(false)
     const navigate = useNavigate();
-    const [appointments, setAppointments] = useState([])
+    const [stylist, setStylist] = useState([])
+    const [service, setService] = useState([])
+    const [date, setDate] = useState('')
+    const [apts, setApts] = useState([]);
+    const [errors, setErrors] = useState([]);
+
+    useEffect(() => {
+        const fetchApts = async () => {
+            const resp = await fetch("/api/appointments");
+            if (resp.ok) {
+                const appointments = await resp.json();
+                setApts(appointments);
+            }
+        };
+        fetchApts();
+    }, []);
+
+    function handleAddApt(newApts) {
+        setApts((apts) => [...apts, newApts]);
+    }
     
-    const formSchema = yup.object().shape({
-        stylist: yup.string().required("Must pick a stylist"),
-        service: yup.string().required("Must pick a service"),
-        date: yup.string().required("Must pick a date."),
-        time: yup.string().required("Must pick a time."),
-        user_id: yup.number().required("Must be logged in"),
-    })
-
-    const formik = useFormik({
-        initialValues: {
-            stylist:'',
-            service:'',
-            date:'', 
-            time:'',
+    const bookAppointment = (e) => {
+        e.preventDefault();
+        axios.post('http://127.0.0.1:5555/appointments', {
             user_id: currentUser.id,
-        },
-        validationSchema: formSchema,
-        onSubmit: (values) => {
-            console.log(values)
-            fetch('/api/appointments', {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(values, null, 2),
-            }).then((res) => {
-                if(res.ok) {
-                    const newAppointment= res.json().then(post => {
-                        setToggle(!toggle)
-                        navigate(`/`)
-                    })
-                    setAppointments(oldReviews => [...oldReviews, newAppointment])
-                }
-            })
-        },
-    })
+            stylist: selectedValue,
+            service: selectedService,
+            dateTime: date,
+        })
+        .then(function (newApts) {
+			handleAddApt(newApts)
+            navigate("/");
+        })
+        .catch(function (error) {
+            console.log(error, 'error');
+        });
+    }
 
+    console.log(selectedValue)
+     
     // dropdown for stylists
-
     const getDisplay = () => {
         if (selectedValue) {
             return selectedValue.name;
@@ -93,9 +91,6 @@ const BookApt = ({currentUser}) => {
         }
         return selectedValue.name === stylists.name;
     }
-
-    console.log(selectedValue)
-    console.log(selectedService)
 
     useEffect(() => {
         const handler = () => setShowMenu(false);
@@ -160,9 +155,9 @@ const BookApt = ({currentUser}) => {
             const services = await resp.json();
             setServices(services);
         }
-    };
-    fetchServices();
-}, []);
+        };
+        fetchServices();
+    }, []);
 
     useEffect(() => {
         const fetchStylists = async () => {
@@ -171,10 +166,9 @@ const BookApt = ({currentUser}) => {
             const stylists = await resp.json();
             setStylists(stylists);
         }
-    };
-    fetchStylists();
+        };
+        fetchStylists();
     }, []);
-    console.log(value)
 
     return (
         <div>
@@ -184,7 +178,7 @@ const BookApt = ({currentUser}) => {
             <Divider />
             </p>
         <div id='book-form' className='bg-greige'>
-        <form onSubmit={formik.handleSubmit} onReset={formik.handleReset}>
+        <form onSubmit={bookAppointment} >
         <div id='book-dropdowns' className='flex centered'>
         <div className="dropdown-container">
             <div onClick={handleInputClick} className="dropdown-input">
@@ -200,8 +194,8 @@ const BookApt = ({currentUser}) => {
                     {stylists.map((sty) => (
                         <div 
                             onClick={() => onItemClick(sty)}
-                            value={formik.values.stylist} 
-                            onChange={formik.handleChange}
+                            value={stylist} 
+                            onChange={(e) => setStylist(e.target.value)}
                             key={sty.id} 
                             className={`dropdown-item ${isSelected(sty) && "selected"}`}>
                                 {sty.name}- {sty.job}
@@ -225,8 +219,8 @@ const BookApt = ({currentUser}) => {
                         <div 
                             onClick={() => onServiceClick(s)}
                             key={s.id} 
-                            value={formik.values.service} 
-                            onChange={formik.handleChange}
+                            value={service} 
+                            onChange={(e) => setService(e.target.value)}
                             className={`dropdown-item ${isSelectedService(s) && "selected"}`}>
                                 {s.name}
                         </div>
@@ -240,21 +234,21 @@ const BookApt = ({currentUser}) => {
             <div id='date-picker'>
             <DatePicker
             label="Service Date"
-            value={formik.values.date}
-            onChange={(newValue) => setValue(newValue)}
+            value={date}
+            onChange={(newValue) => setDate(newValue)}
             />
             </div>
             <div id='date-picker'>
             <TimePicker
             minutesStep={15}
             label="Service Time"
-            value={formik.values.time}
-            onChange={(newValue) => setValue(newValue)}
+            value={date}
+            onChange={(newValue) => setDate(newValue)}
             />
             </div>
         </DemoContainer>
         </LocalizationProvider>
-        <button id='book-button' type='input' className="btn bg-tan opacity-50 rounded-[10px]">Book Appointment</button>
+        <button id='book-button' type='submit' className="btn hover:bg-brown hover:text-greige bg-tan opacity-50 rounded-[10px]">Book Appointment</button>
         </form>
         </div>
         </div>
@@ -262,3 +256,5 @@ const BookApt = ({currentUser}) => {
 }
 
 export default BookApt;
+
+

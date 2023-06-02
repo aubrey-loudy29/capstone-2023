@@ -155,7 +155,7 @@ function App() {
             <Route path='/book' element={<div><Navbar /><BookApt currentUser={currentUser}/></div>} />
             <Route path='/consult' element={<div><Navbar /><Consult /></div>} />
             <Route path='/cart' element={<div><Navbar /><Cart onAddToCart={onAddToCart} onRemove={onRemove} cartItems={cartItems}/></div>} />
-            <Route path='/submitted' element={<div><Navbar /><Submitted /></div>} />
+            <Route path='/submitted' element={<Submitted />} />
             <Route path='/reviews' element={<div><Navbar /><Reviews currentUser={currentUser}/></div>} />
         </Routes>
     )

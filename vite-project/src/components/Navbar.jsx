@@ -9,34 +9,34 @@ const Navbar = () => {
             <img id='nav-logo' src={small} alt='small logo' />
             <div id='nav-button-group' className="space-x-4">
             <Link to={"/"}>
-                <button id='nav-button' className="btn bg-gray-100 rounded-[12px] underline underline-offset-8">Home</button>
+                <button id='nav-button' className="btn hover:text-darkGray hover:opacity-75 focus:outline underline underline-offset-8">Home</button>
             </Link>
             <Link to={"/stylists"}>
-                <button id='nav-button' className="btn bg-gray-100 rounded-[12px] underline underline-offset-8">Stylists</button>
+                <button id='nav-button' className="btn hover:text-darkGray hover:opacity-75 focus:outline underline underline-offset-8">Stylists</button>
             </Link>
             <Link to={"/locations"}>
-                <button id='nav-button' className="btn bg-gray-100 rounded-[12px] underline underline-offset-8">Locations</button>
+                <button id='nav-button' className="btn hover:text-darkGray hover:opacity-75 focus:outline underline underline-offset-8">Locations</button>
             </Link>
             <Link to={"/services"}>
-                <button id='nav-button' className="btn bg-gray-100 rounded-[12px] underline underline-offset-8">Services</button>
+                <button id='nav-button' className="btn hover:text-darkGray hover:opacity-75 focus:outline underline underline-offset-8">Services</button>
             </Link>
             <Link to={"/gallery"}>
-                <button id='nav-button' className="btn bg-gray-100 rounded-[12px] underline underline-offset-8">Gallery</button>
+                <button id='nav-button' className="btn hover:text-darkGray hover:opacity-75 focus:outline underline underline-offset-8">Gallery</button>
             </Link>
             <Link to={"/products"}>
-                <button id='nav-button' className="btn bg-gray-100 rounded-[12px] underline underline-offset-8">Products</button>
+                <button id='nav-button' className="btn hover:text-darkGray hover:opacity-75 focus:outline underline underline-offset-8">Products</button>
             </Link>
             <Link to={"/cart"}>
-                <button id='nav-button' className="btn bg-gray-100 rounded-[12px] underline underline-offset-8">Cart</button>
+                <button id='nav-button' className="btn hover:text-darkGray hover:opacity-75 focus:outline underline underline-offset-8">Cart</button>
             </Link>
             <Link to={"/book"}>
-                <button id='nav-button' className="btn bg-gray-100 rounded-[12px] underline underline-offset-8">Book an Appointment</button>
+                <button id='nav-button' className="btn hover:text-darkGray hover:opacity-75 focus:outline underline underline-offset-8">Book an Appointment</button>
             </Link>
             <Link to={"/profile"}>
-                <button id='nav-button' className="btn bg-gray-100 rounded-[12px] underline underline-offset-8">Profile</button>
+                <button id='nav-button' className="btn hover:text-darkGray hover:opacity-75 focus:outline underline underline-offset-8">Profile</button>
             </Link>
             <Link to={"/login"}>
-                <button id='nav-button' className="btn bg-gray-100 rounded-[12px] underline underline-offset-8">Logout</button>
+                <button id='nav-button' className="btn hover:text-darkGray hover:opacity-75 focus:outline underline underline-offset-8">Logout</button>
             </Link>
             </div>
         </div>

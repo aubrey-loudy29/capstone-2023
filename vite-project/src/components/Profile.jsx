@@ -68,13 +68,13 @@ const Profile = ({currentUser}) => {
                
                 <p id='empty-profile' className='text-darkGray opacity-50'>You dont have any reviews</p>
                 <Link to={"/reviews"}>
-                    <button id='profile-button' className="btn bg-tan text-dark-gray rounded-[12px] opacity-50">Write a Review!</button>
+                    <button id='profile-button' className="btn bg-tan hover:opacity-75 rounded-[12px] opacity-50">Write a Review!</button>
                 </Link>
             </div>}
             {reviews && reviews.map((r) => (
                     <div key={r.id} className="p-2">
                             <p id='profile-information'className="text-darkBlue text-left">•{r.text}</p> 
-                            <button id='profile-delete' className="btn bg-brown text-greige rounded-[12px] opacity-50" onClick={() => handleDelete(r)}>Delete Review.</button>
+                            <button id='profile-delete' className="btn hover:opacity-75 bg-brown text-greige rounded-[12px] opacity-50" onClick={() => handleDelete(r)}>Delete Review.</button>
                     </div>
             ))}
             </div>
@@ -84,7 +84,7 @@ const Profile = ({currentUser}) => {
                
                 <p id='empty-profile' className='text-darkGray opacity-50'>You dont have any Appointments</p>
                 <Link to={"/book"}>
-                    <button id='profile-button' className="btn bg-tan text-dark-gray rounded-[12px] opacity-50">Book an Appointment!</button>
+                    <button id='profile-button' className="btn bg-tan hover:opacity-75 rounded-[12px] opacity-50">Book an Appointment!</button>
                 </Link>
             </div>}
             {appointments && appointments.map((a) => (

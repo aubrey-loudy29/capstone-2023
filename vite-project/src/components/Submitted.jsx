@@ -1,46 +1,28 @@
-import { Link } from "react-router-dom"
+import Divider from '@mui/material/Divider';
+import { useNavigate } from 'react-router-dom'
 
 const Submitted = () => {
+    const navigate = useNavigate();
+
+    const refresh = () => {
+        navigate(`/`)
+        window.location.reload(false);
+    }
+    
     return (
-        <div id='submit-page' class="bg-cover bg-no-repeat bg-center bg-[url('https://i.pinimg.com/564x/89/1b/54/891b54569d3926c3ea5c4b175ced69a3.jpg')]">
-            <p className='text-transparent'> . </p>
-            <p className='text-transparent'> . </p>
-            <p className='text-transparent'> . </p>
-            <p className='text-transparent'> . </p>
-            <p className='text-transparent'> .</p>
-            <p className='text-transparent'> .</p>
-            <p className='text-transparent'> .</p>
-            <p className='text-transparent'> .</p>
-            <p className='text-transparent'> .</p>
-            <p className='text-transparent'> .</p>
-            <p className='text-transparent'> .</p>
-            <p className='text-transparent'> .</p>
-            <p id='submission-text'>
-            thank you for your submission
+        <div>
+            <p id='locations-title'>
+            <Divider />
+               THANK YOU!
+            <Divider />
             </p>
-            <p id='submission-text-2'>
-            we will reach out to you soon
-            </p>
-            <Link to={"/"}>
-                <button id='sub-button' className="btn bg-gray-100 rounded-[12px]">back to home</button>
-            </Link>
-            <p className='text-transparent'>. </p>
-            <p className='text-transparent'>. </p>
-            <p className='text-transparent'>. </p>
-            <p className='text-transparent'> .</p>
-            <p className='text-transparent'> .</p>
-            <p className='text-transparent'> .</p>
-            <p className='text-transparent'> .</p>
-            <p className='text-transparent'> .</p>
-            <p className='text-transparent'> .</p>
-            <p className='text-transparent'> .</p>
-            <p className='text-transparent'> .</p>
-            <p className='text-transparent'> .</p>
-            <p className='text-transparent'> .</p>
-            <p className='text-transparent'> .</p>
-            <p className='text-transparent'> .</p>
-            <p className='text-transparent'> .</p>
-            <p className='text-transparent'> .</p>
+            <div id='checked-form' className="columns-1 justify-items-start p-2 bg-lightBlue rounded">
+                <p id='submission-text' className='text-blue'>
+                    Thank you for your submission. 
+                    We will reach out to you shortly!
+                </p>
+                <button id='review-button' onClick={refresh} className='btn hover:opacity-100 bg-greige opacity-75 rounded-[12px]'>Back to Home</button>
+            </div>
         </div>
     )
 }

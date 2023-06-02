@@ -40,7 +40,7 @@ const Products = () => {
             </p>
             <ImageList cols={4} gap={40}>
             {products.map((p) => (
-                <ImageListItem key={p.id}>
+                <ImageListItem key={p.id} className='group/edit hover:opacity-75'>
                     <img 
                     src={p.image} 
                     srcSet={p.image}
@@ -53,6 +53,9 @@ const Products = () => {
                     subtitle={<span>${p.price}.00</span>}
                     position="below"
                     />
+                    <a class="group/edit invisible hover:bg-slate-200 group-hover/item:visible ...">
+                    <span class="group-hover/edit:text-gray-700 ...">Call</span>
+                    </a>
                 </ImageListItem>
             ))}
             </ImageList>

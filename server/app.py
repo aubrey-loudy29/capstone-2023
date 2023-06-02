@@ -112,11 +112,10 @@ class Appointments(Resource):
         print(data)
         try:
             new_appointment = Appointment(
-                    user_id=data['user_id'],
-                    stylist=data['stylist'],
-                    service=data['service'],
-                    date=data['date'],
-                    time=data['time']
+                user_id=data['user_id'],
+                stylist=data['stylist'],
+                service=data['service'],
+                dateTime=data['dateTime']
             )
             db.session.add(new_appointment)
             db.session.commit()
