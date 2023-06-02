@@ -83,7 +83,7 @@ const Login = ({handleLogin, rerender, setRerender}) => {
 	<p id='login-big' className='text-darkGray opacity-75'>
 		Welcome to Elysian Salon
 	</p>
-	<p id='login-small' className='text-darkGray opacity-50'>Please login or register to view our site!</p>
+	<p id='login-small' className='text-darkGray'>Please login to view our site!</p>
 	<div className="container h-100">
 		<div className="container-fluid h-custom">
 		<div id='login-form' className="col-md-8 col-lg-6 col-xl-4 offset-xl-1 bg-greige">
