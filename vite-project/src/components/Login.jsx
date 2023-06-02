@@ -86,15 +86,16 @@ const Login = ({handleLogin, rerender, setRerender}) => {
 	<p id='login-small' className='text-darkGray opacity-50'>Please login or register to view our site!</p>
 	<div className="container h-100">
 		<div className="container-fluid h-custom">
-		<div id='login-form' className="bg-greige text-brown">
+		<div id='login-form' className="col-md-8 col-lg-6 col-xl-4 offset-xl-1 bg-greige">
     <div className="content">
-      <div id='login-title' className="text underline underline-offset-8">
-        Login Here
-      </div>
       <form onSubmit={handleLoginSubmit}>
-	  <div className="field">
+	  <div className="d-flex flex-row align-items-center justify-content-center justify-content-lg-start">
+      <p id='login-title' className="text underline underline-offset-8"> Login Here </p>
+	  </div>
+	  <div className="field" id='login-input'>
 		  <label id='login-label'>Username</label>
           <input
+		  	placeholder='username'
             value={username}
             onChange={handleUsername}
             type="text"
@@ -102,9 +103,10 @@ const Login = ({handleLogin, rerender, setRerender}) => {
           />
           <span className="fas fa-user"></span>
         </div>
-        <div className="field">
+        <div className="field" id='login-input'>
 		<label id='login-label'>Email</label>
           <input
+		  	placeholder='email address'
             value={email}
             onChange={handleEmail}
             type="text"
@@ -112,9 +114,10 @@ const Login = ({handleLogin, rerender, setRerender}) => {
           />
           <span className="fas fa-user"></span>
         </div>
-        <div className="field">
+        <div className="field" id='login-input'>
 		<label id='login-label'>Password</label>
           <input
+		  	placeholder='password'
             value={password}
             onChange={handlePassword}
             type="password"

@@ -42,27 +42,27 @@ const Register = ({handleLogin}) => {
                   <div id='login-form' className="col-md-8 col-lg-6 col-xl-4 offset-xl-1 bg-greige">
                     <form onSubmit={registerUser}>
                       <div className="d-flex flex-row align-items-center justify-content-center justify-content-lg-start">
-                        <p id='login-title'className="lead fw-normal mb-0 me-3 underline underline-offset-8 text-brown">Create an Account</p>
+                        <p id='login-title'className="lead fw-normal mb-0 me-3 underline underline-offset-8 text-brown">Register</p>
                       </div>
 
-                      <div className="form-outline mb-4">
+                      <div className="form-outline mb-4" id='login-input'>
                         <label id='login-label' for="form3Example5">Username</label>
                         <input type="username" value={username} onChange={(e) => setUsername(e.target.value)} id="form3Example5" className="form-control form-control-lg" placeholder="username" />
                       </div>
      
-                      <div className="form-outline mb-4">
+                      <div className="form-outline mb-4" id='login-input'>
                         <label id='login-label' for="form3Example3">Email address</label>
                         <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} id="form3Example3" className="form-control form-control-lg" placeholder="email address" />
                       </div>
      
-                      <div className="form-outline mb-3">
-                        <label id='login-label' for="form3Example4">Password</label>
+                      <div className="form-outline mb-3" id='login-input'>
+                        <label id='login-label'for="form3Example4">Password</label>
                         <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} id="form3Example4" className="form-control form-control-lg" placeholder="password" />
                       </div>
      
                       <div className="text-center text-lg-start mt-4 pt-2">
 						
-                        <button type="button" id='signin-button' className="btn btn-primary hover:underline opacity-50 btn-lg" onClick={() => registerUser()} >Sign Up</button>
+                        <button type="button" id='signin-button' className="btn btn-primary hover:underline opacity-50 btn-lg" onClick={() => registerUser()} >Create Account</button>
 						
                         <p id='login-route' className="small fw-bold mt-2 pt-1 mb-0">Already have an account? <a href="/login" id='nav-button' className=" btn opacity-50 hover:underline link-danger">Login Here</a></p>
                       </div>

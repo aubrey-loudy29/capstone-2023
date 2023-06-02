@@ -505,6 +505,12 @@
   margin-right: 10px;
 }
 
+#login-input {
+  font-family: 'Nanum Myeongjo';
+  font-size: 15px;
+  margin-right: 5px;
+}
+
 #login-route {
   font-family: 'Nanum Myeongjo';
   font-size: 20px;
@@ -644,13 +650,12 @@
 #profile-information {
   font-family: 'Thasadith';
   font-size: 17px;
-  
 }
 
 #profile-boxes {
   margin-left: auto;
   margin-right: auto;
-  margin-bottom: 150px;
+  margin-bottom: 200px;
   width: 500px;
   border: 2px solid #a79479;
   position: relative;
@@ -753,4 +758,37 @@ body.active-modal {
   font-size: 30px;
   margin-top: 20px;
   margin-bottom: 15px;
+}
+
+#appointment-box {
+  width: 400px;
+  margin-left: 70px;
+  margin-right: 70px;
+  margin-top: 15px;
+  border: 1px solid #a79479;
+  position: relative;
+  border-radius: 5px;
+  margin-bottom: 15px
+}
+
+#appointment-date{
+  font-family: 'Nanum Myeongjo';
+  font-size: 20px;
+}
+
+#profile-info {
+  font-family: 'Thasadith';
+  font-size: 20px;
+}
+
+#profile-infos {
+  font-family: 'Thasadith';
+  font-size: 15px;
+  margin-bottom: 10px;
+}
+
+#appointment-delete {
+  margin-bottom: 5px;
+  font-family: 'Nanum Myeongjo';
+  font-size: 15px;
 }

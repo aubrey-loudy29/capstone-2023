@@ -54,22 +54,22 @@ const BookApt = ({currentUser}) => {
     
     const bookAppointment = (e) => {
         e.preventDefault();
+        console.log(selectedValue)
         axios.post('http://127.0.0.1:5555/appointments', {
             user_id: currentUser.id,
-            stylist: selectedValue,
-            service: selectedService,
+            stylist_id: selectedValue.id,
+            service_id: selectedService.id,
             dateTime: date,
         })
         .then(function (newApts) {
 			handleAddApt(newApts)
             navigate("/");
+            window.location.reload(false);
         })
         .catch(function (error) {
             console.log(error, 'error');
         });
     }
-
-    console.log(selectedValue)
      
     // dropdown for stylists
     const getDisplay = () => {

@@ -5,8 +5,11 @@ import { useSelector } from "react-redux";
 
 const Profile = ({currentUser}) => {
     const [users, setUsers] = useState([]);
+    const [profiles, setProfiles] = useState([]);
     const [yourReviews, setYourReviews] = useState([{}])
     const [allReviews, setAllReviews] = useState([{}])
+    const [yourAppointments, setYourAppointments] = useState([{}])
+    const [allAppointments, setAllAppointments] = useState([{}])
 
     const {username, reviews, appointments, email} = currentUser
 
@@ -51,6 +54,35 @@ const Profile = ({currentUser}) => {
         window.location.reload(false);
     }
 
+    //delete appointment
+    useEffect(() => {
+        const fetchAppts = async () => {
+        const data = await fetch("/api/appointments");
+        setAllAppointments(data.data);
+    };
+    fetchAppts();
+    })
+
+    const deleteYourAppointment = (appointment) => {
+        setYourAppointments(yourAppointments.filter(a => a.id !== appointment.id))
+        setAllAppointments(allAppointments.filter(a => a.id !== appointment.id))
+    }
+
+    const handleDeleteAppointment = (appointment) => {
+        fetch(`/api/appointments/${appointment.id}`, {
+          method: 'DELETE'
+        })
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Failed to delete appointment')
+          }
+          deleteYourAppointment(appointment)
+          setProfiles(profiles);
+        })
+        .catch(error => console.error(error))
+        window.location.reload(false);
+    }
+
     return (
         <div>
             <p id='locations-title'>
@@ -74,7 +106,7 @@ const Profile = ({currentUser}) => {
             {reviews && reviews.map((r) => (
                     <div key={r.id} className="p-2">
                             <p id='profile-information'className="text-darkBlue text-left">•{r.text}</p> 
-                            <button id='profile-delete' className="btn hover:opacity-75 bg-brown text-greige rounded-[12px] opacity-50" onClick={() => handleDelete(r)}>Delete Review.</button>
+                            <button id='profile-delete' className="btn hover:opacity-75 bg-brown text-greige rounded-[12px] opacity-50" onClick={() => handleDelete(r)}>Delete Review</button>
                     </div>
             ))}
             </div>
@@ -88,8 +120,16 @@ const Profile = ({currentUser}) => {
                 </Link>
             </div>}
             {appointments && appointments.map((a) => (
-                    <div key={a.id} className="p-2">
-                            <p className="text-darkBlue">{a.stylist}</p> 
+                    <div key={a.id} id='appointment-box' className="hover:bg-greige hover:opacity-75 p-2">
+                        <div >
+                            <p id='appointment-date' className="text-darkBlue font-medium">{a.date_time.substring(5,7)}/{a.date_time.substring(8,10)}/{a.date_time.substring(0,4)} @{a.date_time.substring(11,13)-7}:{a.date_time.substring(14,16)}</p> 
+                        <div className='text-left'>
+                            <p id='profile-info' className='text-darkGray'> Your appointment is with {a.stylists.name}!</p>
+                            <p id='profile-info' className='text-darkGray'>Service: {a.services.name}</p>
+                            <p id='profile-infos' className='text-darkGray'>For this service, please plan to be at the salon for {a.services.length} minutes!</p>
+                        </div>
+                        <button id='appointment-delete' className="btn hover:opacity-75 bg-brown text-greige rounded-[12px] opacity-50" onClick={() => handleDeleteAppointment(a)}>Delete Appointment</button>
+                        </div>
                     </div>
             ))}
             </div>

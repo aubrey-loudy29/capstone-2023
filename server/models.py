@@ -42,7 +42,7 @@ class Stylist(db.Model, SerializerMixin):
     __tablename__ = 'stylists'
         
     # serialize_rules = ('-created_at', '-updated_at', '-location_id', )
-    serialize_only = ('name', 'image', 'type', 'bio', 'locations', 'job',)
+    serialize_only = ('name', 'image', 'type', 'bio', 'locations', 'job', 'id', )
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String)
@@ -88,13 +88,13 @@ class Product(db.Model, SerializerMixin):
 class Appointment(db.Model, SerializerMixin):
     __tablename__ = 'appointments'
 
-    serialize_only = ('user', 'stylists', 'services', 'dateTime', )
+    serialize_only = ('stylists', 'services', 'date_time', 'id',)
     
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     stylist_id = db.Column(db.Integer, db.ForeignKey('stylists.id'))
     service_id = db.Column(db.Integer, db.ForeignKey('services.id'))
-    dateTime = db.Column(db.DateTime, nullable=False)
+    date_time = db.Column(db.String, nullable=False)
     # time = db.Column(db.String, nullable=False)
     created_at = db.Column(db.DateTime, server_default=db.func.now())
     updated_at = db.Column(db.DateTime, onupdate=db.func.now())
@@ -116,7 +116,7 @@ class Appointment(db.Model, SerializerMixin):
 class Service(db.Model, SerializerMixin):
     __tablename__ = 'services'
 
-    serialize_only = ('name', 'category', 'price', 'length', 'type', )
+    serialize_only = ('name', 'category', 'price', 'length', 'type', 'id', )
     
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String)

@@ -32,11 +32,10 @@ const Reviews = ({currentUser}) => {
             }).then((res) => {
                 if(res.ok) {
                     const newReview= res.json().then(post => {
-                        setToggle(!toggle)
                         navigate(`/`)
+                        window.location.reload(false);
                     })
                     setReview(oldReviews => [...oldReviews, newReview])
-                    window.location.reload(false);
                 }
             })
         },

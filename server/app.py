@@ -113,9 +113,9 @@ class Appointments(Resource):
         try:
             new_appointment = Appointment(
                 user_id=data['user_id'],
-                stylist=data['stylist'],
-                service=data['service'],
-                dateTime=data['dateTime']
+                stylist_id=data['stylist_id'],
+                service_id=data['service_id'],
+                date_time=data['dateTime']
             )
             db.session.add(new_appointment)
             db.session.commit()
@@ -123,6 +123,7 @@ class Appointments(Resource):
         except Exception as e:
             return make_response({
                 "errors": [e.__str__()]}, 400)
+        print(new_appointment)
         
 class AppointmentsById(Resource):
     def get(self, id):
